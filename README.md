@@ -33,3 +33,11 @@ If:
 `<` + a + b + code: Checks if a < b and if so, then it runs code.
 
 `=` + a + b + code: Checks if a == b and if so, then it runs code.
+
+Random:
+
+`rint` + min + max: Sets current value at pointer adress to random integer between min and max.
+
+`rr`: Sets current value at pointer adress to random float between 0 and 1.
+
+`runi` + min + max: Sets current value at pointer adress to random uniform between min and max.
