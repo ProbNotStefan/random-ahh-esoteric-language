@@ -1,4 +1,6 @@
 import modules.ifmodule
+import modules.mathmodule
+import modules.randommodule
 import modules.timemodule
 
 def interpret_line(line,production_index):
@@ -20,10 +22,6 @@ def interpret_line(line,production_index):
             production_line[pointer_index] += 1
         elif cmd == "-":
             production_line[pointer_index] -= 1
-        elif cmd == "*":
-            production_line[pointer_index] *= production_line[pointer_index+1]
-        elif cmd == "/":
-            production_line[pointer_index] /= production_line[pointer_index+1]
         elif cmd == "?":
             if line[i+1] == "n":
                 print(str(production_line[pointer_index]),end="")
@@ -70,6 +68,8 @@ def interpret_line(line,production_index):
                         production_line[pointer_index] *= num
                     elif line[i+3] == "/":
                         production_line[pointer_index] /= num
+                    elif line[i+3] == "%":
+                        production_line[pointer_index] %= num
                 elif line[i+2] == "f":
                     num = float(input())
                     if line[i+3] == "#":
@@ -82,6 +82,8 @@ def interpret_line(line,production_index):
                         production_line[pointer_index] *= num
                     elif line[i+3] == "/":
                         production_line[pointer_index] /= num
+                    elif line[i+3] == "%":
+                        production_line[pointer_index] %= num
                 i += 2
             else:
                 num = ""
@@ -103,6 +105,12 @@ def interpret_line(line,production_index):
                             break
                 if num == "":
                     pass
+                elif "x" in num:
+                    if len(num) > 1:
+                        num = num[1:]
+                        num = float(production_line[pointer_index+int(num)])
+                    else:
+                        num = float(production_line[pointer_index])
                 elif "." in num:
                     num = float(num)
                 else:
@@ -119,6 +127,8 @@ def interpret_line(line,production_index):
                     production_line[pointer_index] *= num
                 elif line[i+1] == "/":
                     production_line[pointer_index] /= num
+                elif line[i+1] == "%":
+                    production_line[pointer_index] %= num
                 if num == "":
                     i += j
                 else:
@@ -209,6 +219,8 @@ def main():
     modulelist = []
     modulelist.append(modules.timemodule.module_check)
     modulelist.append(modules.ifmodule.module_check)
+    modulelist.append(modules.randommodule.module_check)
+    modulelist.append(modules.mathmodule.module_check)
     global pointer_indexes
     global code
     global production_lines
